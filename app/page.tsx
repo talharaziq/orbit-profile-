@@ -297,7 +297,9 @@ export default function HomePage() {
   const bestRepo = useMemo(() => profile.repositories.filter((repo) => !repo.isFork).sort((a, b) => b.stars - a.stars)[0], [profile.repositories]);
   const archivedCount = profile.repositories.filter((repo) => repo.isArchived).length;
   const unlicensedCount = profile.repositories.filter((repo) => !repo.license && !repo.isFork && !repo.isArchived).length;
+  
   const staleCount = profile.repositories.filter((repo) => !repo.isArchived && (Date.now() - new Date(repo.pushedAt ?? repo.updatedAt).getTime()) > 180 * 86_400_000).length;
+
   const joinYear = new Date(profile.createdAt).getUTCFullYear();
 
   return (
