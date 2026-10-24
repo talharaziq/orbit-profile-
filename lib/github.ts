@@ -85,7 +85,7 @@ async function getGraphData(username: string, range: RangeKey): Promise<GraphRes
         nodes {
           name nameWithOwner description url stargazerCount forkCount updatedAt pushedAt createdAt isFork isArchived
           primaryLanguage { name color }
-          languages(first: 10, orderBy: SIZE) { edges { size node { name color } } }
+          languages(first: 10, orderBy: { field: SIZE, direction: DESC })
           licenseInfo { name }
           issues(states: OPEN) { totalCount }
           pullRequests(states: OPEN) { totalCount }
