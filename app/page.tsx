@@ -175,25 +175,37 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
+  
+  useEffect(() => {
     try {
       const savedTheme = window.localStorage.getItem("orbit-theme");
-      if (savedTheme === "light" || savedTheme === "dark") setTheme(savedTheme);
+      if (savedTheme === "light" || savedTheme === "dark") {
+        window.setTimeout(() => setTheme(savedTheme), 0);
+      }
+
       const savedAccent = window.localStorage.getItem("orbit-accent");
       const savedAccentIndex = accents.findIndex((item) => item.name === savedAccent);
-      if (savedAccentIndex >= 0) setAccentIndex(savedAccentIndex);
+      if (savedAccentIndex >= 0) {
+        window.setTimeout(() => setAccentIndex(savedAccentIndex), 0);
+      }
     } catch {
       // Local storage may be disabled; the dashboard remains usable without saved preferences.
     }
+
     const params = new URLSearchParams(window.location.search);
     const fromUrl = params.get("username");
     const rangeParam = params.get("range");
-    const validRange = dateRanges.some((item) => item.key === rangeParam) ? rangeParam as RangeKey : "year";
+    const validRange = dateRanges.some((item) => item.key === rangeParam)
+      ? rangeParam as RangeKey
+      : "year";
+
     if (fromUrl) {
       setUsername(fromUrl);
       setRange(validRange);
       void loadProfile(fromUrl, validRange);
     }
   }, [loadProfile]);
+
 
   useEffect(() => {
     try { window.localStorage.setItem("orbit-theme", theme); } catch { /* Optional preference only. */ }
