@@ -1,6 +1,5 @@
 import type { ActivityDay, DataMode, DeveloperProfile, GitHubRepoRest, GitHubUserRest, LanguageStat, RangeKey, Repository } from "./types";
-import { countActiveDays, getCurrentStreak, getLongestStreak, getRangeStart, toMonthlyActivity, totalActivity } from "./metrics";
-
+import { countActiveDays, getCurrentStreak, getLongestStreak, getRangeStart, toMonthlyActivity } from "./metrics";
 const API = "https://api.github.com";
 const GRAPHQL = "https://api.github.com/graphql";
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
